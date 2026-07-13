@@ -1,0 +1,14 @@
+beautifulsoup4
+pandas
+requests
+openpyxl
+matplotlib
+seaborn
+wordcloud
+joblib
+scikit-learn
+sqlalchemy
+pymysql
+nltk
+fastapi
+uvicorn

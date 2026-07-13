@@ -1,0 +1,406 @@
+{
+    "positive": [
+        {
+            "text": "good",
+            "value": 1973
+        },
+        {
+            "text": "great",
+            "value": 990
+        },
+        {
+            "text": "really",
+            "value": 729
+        },
+        {
+            "text": "love",
+            "value": 679
+        },
+        {
+            "text": "best",
+            "value": 671
+        },
+        {
+            "text": "fun",
+            "value": 568
+        },
+        {
+            "text": "feel",
+            "value": 485
+        },
+        {
+            "text": "new",
+            "value": 485
+        },
+        {
+            "text": "want",
+            "value": 441
+        },
+        {
+            "text": "recommend",
+            "value": 375
+        },
+        {
+            "text": "say",
+            "value": 354
+        },
+        {
+            "text": "think",
+            "value": 333
+        },
+        {
+            "text": "look",
+            "value": 323
+        },
+        {
+            "text": "pretty",
+            "value": 277
+        },
+        {
+            "text": "need",
+            "value": 273
+        },
+        {
+            "text": "enjoy",
+            "value": 272
+        },
+        {
+            "text": "come",
+            "value": 270
+        },
+        {
+            "text": "run",
+            "value": 269
+        },
+        {
+            "text": "use",
+            "value": 249
+        },
+        {
+            "text": "know",
+            "value": 248
+        },
+        {
+            "text": "far",
+            "value": 244
+        },
+        {
+            "text": "try",
+            "value": 243
+        },
+        {
+            "text": "buy",
+            "value": 225
+        },
+        {
+            "text": "bad",
+            "value": 224
+        },
+        {
+            "text": "amazing",
+            "value": 219
+        },
+        {
+            "text": "start",
+            "value": 213
+        },
+        {
+            "text": "add",
+            "value": 213
+        },
+        {
+            "text": "nice",
+            "value": 204
+        },
+        {
+            "text": "early",
+            "value": 203
+        },
+        {
+            "text": "long",
+            "value": 199
+        },
+        {
+            "text": "original",
+            "value": 192
+        },
+        {
+            "text": "amaze",
+            "value": 190
+        },
+        {
+            "text": "actually",
+            "value": 188
+        },
+        {
+            "text": "hard",
+            "value": 186
+        },
+        {
+            "text": "overall",
+            "value": 175
+        },
+        {
+            "text": "free",
+            "value": 173
+        },
+        {
+            "text": "little",
+            "value": 169
+        },
+        {
+            "text": "big",
+            "value": 167
+        },
+        {
+            "text": "absolutely",
+            "value": 164
+        },
+        {
+            "text": "old",
+            "value": 162
+        },
+        {
+            "text": "different",
+            "value": 162
+        },
+        {
+            "text": "especially",
+            "value": 157
+        },
+        {
+            "text": "win",
+            "value": 157
+        },
+        {
+            "text": "cool",
+            "value": 152
+        },
+        {
+            "text": "high",
+            "value": 149
+        },
+        {
+            "text": "easy",
+            "value": 147
+        },
+        {
+            "text": "definitely",
+            "value": 142
+        },
+        {
+            "text": "work",
+            "value": 142
+        },
+        {
+            "text": "beautiful",
+            "value": 141
+        },
+        {
+            "text": "open",
+            "value": 129
+        }
+    ],
+    "negative": [
+        {
+            "text": "bad",
+            "value": 284
+        },
+        {
+            "text": "good",
+            "value": 160
+        },
+        {
+            "text": "want",
+            "value": 124
+        },
+        {
+            "text": "really",
+            "value": 120
+        },
+        {
+            "text": "try",
+            "value": 101
+        },
+        {
+            "text": "hate",
+            "value": 97
+        },
+        {
+            "text": "use",
+            "value": 93
+        },
+        {
+            "text": "kill",
+            "value": 92
+        },
+        {
+            "text": "new",
+            "value": 87
+        },
+        {
+            "text": "feel",
+            "value": 83
+        },
+        {
+            "text": "think",
+            "value": 79
+        },
+        {
+            "text": "run",
+            "value": 78
+        },
+        {
+            "text": "dont",
+            "value": 72
+        },
+        {
+            "text": "say",
+            "value": 70
+        },
+        {
+            "text": "need",
+            "value": 67
+        },
+        {
+            "text": "terrible",
+            "value": 65
+        },
+        {
+            "text": "lose",
+            "value": 62
+        },
+        {
+            "text": "die",
+            "value": 62
+        },
+        {
+            "text": "buy",
+            "value": 59
+        },
+        {
+            "text": "fun",
+            "value": 59
+        },
+        {
+            "text": "come",
+            "value": 53
+        },
+        {
+            "text": "know",
+            "value": 52
+        },
+        {
+            "text": "start",
+            "value": 52
+        },
+        {
+            "text": "fix",
+            "value": 51
+        },
+        {
+            "text": "high",
+            "value": 48
+        },
+        {
+            "text": "hard",
+            "value": 48
+        },
+        {
+            "text": "stop",
+            "value": 45
+        },
+        {
+            "text": "break",
+            "value": 44
+        },
+        {
+            "text": "ruin",
+            "value": 44
+        },
+        {
+            "text": "single",
+            "value": 44
+        },
+        {
+            "text": "different",
+            "value": 44
+        },
+        {
+            "text": "actually",
+            "value": 43
+        },
+        {
+            "text": "horrible",
+            "value": 43
+        },
+        {
+            "text": "long",
+            "value": 43
+        },
+        {
+            "text": "great",
+            "value": 43
+        },
+        {
+            "text": "work",
+            "value": 43
+        },
+        {
+            "text": "love",
+            "value": 41
+        },
+        {
+            "text": "suck",
+            "value": 40
+        },
+        {
+            "text": "look",
+            "value": 39
+        },
+        {
+            "text": "completely",
+            "value": 37
+        },
+        {
+            "text": "low",
+            "value": 37
+        },
+        {
+            "text": "big",
+            "value": 36
+        },
+        {
+            "text": "dead",
+            "value": 36
+        },
+        {
+            "text": "leave",
+            "value": 36
+        },
+        {
+            "text": "absolutely",
+            "value": 35
+        },
+        {
+            "text": "recommend",
+            "value": 35
+        },
+        {
+            "text": "away",
+            "value": 35
+        },
+        {
+            "text": "best",
+            "value": 34
+        },
+        {
+            "text": "doesn",
+            "value": 34
+        },
+        {
+            "text": "slow",
+            "value": 34
+        }
+    ]
+}
