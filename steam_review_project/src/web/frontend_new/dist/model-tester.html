@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Review Sentiment Sandbox ✳︎</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="model-tester.css">
+  <!-- MediaPipe Hands & Camera Utils for Gesture Control -->
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+</head>
+<body class="bg-[#050508] text-[#f4f4f5] font-sans overflow-hidden min-h-screen relative flex flex-col justify-between selection:bg-[#a78bfa]/30">
+
+  <!-- Interactive 3D Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Top Navbar -->
+  <nav class="border-b border-white/[0.05] bg-[#050508]/60 backdrop-blur-xl sticky top-0 z-50 px-4 sm:px-8 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-6">
+      <a href="/new/" class="text-zinc-100 text-xs font-mono uppercase tracking-widest hover:text-white transition-colors">
+        NLP SENTIMENT SCANNER
+      </a>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <a href="/new/#/sentiment" class="text-sm text-zinc-400 hover:text-white transition-colors">
+        Return to Analyzer
+      </a>
+      <a href="/new/#/enterprise" class="text-sm bg-purple-600/10 text-purple-400 border border-purple-500/20 px-4 py-1.5 rounded-full hover:bg-purple-600 hover:text-white transition-all text-xs font-semibold">
+        B2B Console
+      </a>
+      <a href="/new/model-tester.html" class="text-sm text-[#a78bfa] hover:text-[#c084fc] transition-colors font-mono font-semibold">
+        Model Tester
+      </a>
+    </div>
+  </nav>
+
+  <!-- Draggable 3D Workspace area -->
+  <main id="workspace" class="relative w-full overflow-hidden flex-1">
+    
+    <!-- Zoomable sandbox deck wrapper -->
+    <div id="sandbox-deck" class="absolute inset-0 w-full h-full origin-center">
+      <!-- SVG Connection Lines Layer -->
+      <svg id="connection-lines" class="absolute inset-0 w-full h-full pointer-events-none z-0"></svg>
+      
+      <!-- 1. Floating Sub-Card 1 -->
+      <div id="card-1" class="draggable sub-card-3d rounded-2xl p-6 border border-white/[0.03] w-[320px] cursor-grab active:cursor-grabbing">
+        <div class="drag-grip mb-3.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+        </div>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded border tracking-widest uppercase badge-pos">POS 98.4%</span>
+          <span class="text-[11px] font-mono text-zinc-500">ID: #STM-984</span>
+        </div>
+        <p class="text-[14px] text-zinc-300 leading-relaxed italic">"Best game of the year. The story, graphics, and music are absolute masterpiece..."</p>
+      </div>
+
+      <!-- 2. Floating Sub-Card 2 -->
+      <div id="card-2" class="draggable sub-card-3d rounded-2xl p-6 border border-white/[0.03] w-[320px] cursor-grab active:cursor-grabbing">
+        <div class="drag-grip mb-3.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+        </div>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded border tracking-widest uppercase badge-neg">NEG 97.2%</span>
+          <span class="text-[11px] font-mono text-zinc-500">ID: #STM-972</span>
+        </div>
+        <p class="text-[14px] text-zinc-300 leading-relaxed italic">"Too many microtransactions and pay-to-win mechanics. The community has become toxic."</p>
+      </div>
+
+      <!-- 4. Floating Sub-Card 3 -->
+      <div id="card-3" class="draggable sub-card-3d rounded-2xl p-6 border border-white/[0.03] w-[320px] cursor-grab active:cursor-grabbing">
+        <div class="drag-grip mb-3.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+        </div>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded border tracking-widest uppercase badge-neu">NEU 72.1%</span>
+          <span class="text-[11px] font-mono text-zinc-500">ID: #STM-721</span>
+        </div>
+        <p class="text-[14px] text-zinc-300 leading-relaxed italic">"It has some good moments, but it feels repetitive after about 10 hours."</p>
+      </div>
+
+      <!-- 5. Floating Sub-Card 4 -->
+      <div id="card-4" class="draggable sub-card-3d rounded-2xl p-6 border border-white/[0.03] w-[320px] cursor-grab active:cursor-grabbing">
+        <div class="drag-grip mb-3.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+        </div>
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-[11px] font-mono font-bold px-2.5 py-1 rounded border tracking-widest uppercase badge-pos">POS 96.8%</span>
+          <span class="text-[11px] font-mono text-zinc-500">ID: #STM-968</span>
+        </div>
+        <p class="text-[14px] text-zinc-300 leading-relaxed italic">"Incredible gunplay, smooth movement, and amazing team coordination. Highly recommended."</p>
+      </div>
+    </div>
+    
+    <!-- 3. Main Center Floating Console Card (Placed outside sandbox-deck so it is NOT rotated) -->
+    <div id="main-card" class="draggable glass-3d-card w-full max-w-2xl rounded-3xl p-8 sm:p-12 cursor-grab active:cursor-grabbing transition-all duration-300">
+      
+      <!-- Collapsible Top Header Bar -->
+      <div class="flex items-center justify-between mb-4 border-b border-white/[0.05] pb-3" id="main-card-header">
+        <div class="flex items-center gap-3">
+          <div class="drag-grip cursor-grab active:cursor-grabbing flex gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-white/40"></span>
+          </div>
+          <span id="collapsed-title" class="text-xs font-mono font-bold tracking-widest text-[#a78bfa] uppercase hidden">SENTIMENT SANDBOX</span>
+        </div>
+        <button id="toggle-console-btn" type="button" class="text-zinc-400 hover:text-white transition-colors p-1" title="Minimize Console">
+          <svg id="toggle-icon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Inner background glow -->
+      <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/5 to-transparent pointer-events-none z-0"></div>
+
+      <!-- Collapsible Body Content -->
+      <div id="main-card-body" class="w-full">
+        <!-- Header Title -->
+        <div class="layer-text text-center mb-8">
+          <div class="text-[11px] font-mono tracking-[0.25em] text-[#a78bfa] uppercase mb-2.5 font-bold">// REVIEW CLASSIFICATION SANDBOX</div>
+          <h1 class="text-4xl sm:text-5xl font-heading font-bold text-white tracking-wide leading-tight">Review Sentiment Sandbox</h1>
+          <p class="text-[14px] text-zinc-400 max-w-md mx-auto leading-relaxed mt-3">Type your thoughts and test the neural SVM classification model</p>
+        </div>
+
+        <!-- Input Textarea Frame -->
+        <div id="scanner-frame" class="layer-input glass-input rounded-2xl p-6 min-h-[180px] flex flex-col justify-between overflow-hidden relative">
+          <!-- Glowing Laser line -->
+          <div class="scanner-light"></div>
+
+          <textarea
+            id="aria-textarea"
+            placeholder="Type or paste a game review text here..."
+            maxlength="1000"
+            class="w-full bg-transparent border-none text-[#f4f4f5] placeholder-zinc-650 font-sans text-[16px] font-medium focus:outline-none resize-none leading-relaxed h-[130px]"
+          ></textarea>
+
+          <div class="flex justify-between items-center text-[12px] font-mono text-zinc-550 mt-3 border-t border-white/[0.04] pt-3 relative z-20">
+            <span id="aria-char-count">BUFFER: 0 / 1000 CHARS</span>
+            <span id="prediction-status" class="text-zinc-500">IDLE</span>
+          </div>
+        </div>
+
+        <!-- Action Button -->
+        <div class="layer-btn mt-6 flex flex-col gap-4">
+          <button
+            id="aria-submit-btn"
+            type="button"
+            class="w-full btn-artistic text-white font-bold py-5 px-8 rounded-2xl text-base font-mono uppercase tracking-widest active:scale-[0.98] transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
+            Analyze Sentiment
+          </button>
+
+          <!-- Dynamic Diagnostic output section -->
+          <div id="console-output" class="border border-white/[0.05] bg-black/60 backdrop-blur-md rounded-2xl relative overflow-hidden">
+            <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#a78bfa]/20 to-transparent pointer-events-none"></div>
+            
+            <div class="flex justify-between items-center mb-3.5">
+              <span id="output-badge" class="text-[11px] font-mono font-bold px-2.5 py-1 rounded border tracking-widest uppercase"></span>
+              <span id="output-confidence" class="text-[12px] font-mono text-zinc-500"></span>
+            </div>
+            
+            <p id="output-text" class="text-[16px] text-zinc-200 leading-relaxed italic mb-3.5"></p>
+            
+            <div class="pt-3 border-t border-white/[0.04] flex justify-between items-center text-[11px] font-mono text-zinc-500 tracking-wider">
+              <span>CLASSIFICATION COMPLETE</span>
+              <span id="output-log-id"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Gesture Control HUD Panel & Button -->
+  <div id="gesture-hud-container" style="position: fixed; bottom: 24px; left: 24px; z-index: 10000; display: flex; flex-direction: column; gap: 12px; pointer-events: auto; font-family: monospace; user-select: none;">
+    <!-- HUD Status Card (Initially hidden) -->
+    <div id="gesture-hud-card" class="glass-3d-card" style="display: none; width: 180px; background: rgba(9, 9, 11, 0.9); border: 1px solid rgba(167, 139, 250, 0.3); border-radius: 8px; padding: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); font-size: 10px; color: #a1a1aa; position: relative; overflow: hidden;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; border-bottom: 1px solid rgba(167, 139, 250, 0.2); padding-bottom: 4px;">
+        <span style="color: #a78bfa; font-weight: bold; text-transform: uppercase; letter-spacing: 0.05em;">GESTURE INPUT</span>
+        <span id="gesture-status-dot" style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #ef4444;"></span>
+      </div>
+      
+      <!-- Offscreen video -->
+      <video id="gesture-video" autoplay playsinline muted style="display: none;" width="160" height="120"></video>
+      
+      <!-- Canvas preview -->
+      <div style="position: relative; aspect-ratio: 4/3; background: #18181b; border: 1px solid #27272a; border-radius: 4px; overflow: hidden; margin-bottom: 8px;">
+        <canvas id="gesture-canvas" width="156" height="117" style="width: 100%; height: 100%; display: block; object-fit: cover;"></canvas>
+        <div id="gesture-scanning-overlay" style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.6); text-align: center; padding: 0 8px;">
+          <span style="font-size: 9px; color: #71717a; text-transform: uppercase;">Camera Scanning</span>
+          <span style="font-size: 8px; color: rgba(167, 139, 250, 0.7); margin-top: 4px; text-transform: uppercase; animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;">Raise Hand</span>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 4px; color: #71717a;">
+        <div style="display: flex; justify-content: space-between;">
+          <span>STATUS:</span>
+          <span id="gesture-status-text" style="color: #71717a;">STANDBY</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>COORD X:</span>
+          <span id="gesture-coord-x" style="color: #d4d4d8; font-weight: 600;">0.00</span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>COORD Y:</span>
+          <span id="gesture-coord-y" style="color: #d4d4d8; font-weight: 600;">0.00</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toggle Button -->
+    <button id="gesture-toggle-btn" class="glass-3d-card" style="display: flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 9999px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(24, 24, 27, 0.9); text-transform: uppercase; font-size: 11px; letter-spacing: 0.1em; color: #a1a1aa; cursor: pointer; transition: all 0.2s; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3); outline: none;">
+      <span id="gesture-btn-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #71717a; display: inline-block;"></span>
+      <span id="gesture-btn-text">GESTURE: DISABLED</span>
+    </button>
+  </div>
+
+  <!-- Virtual Cursor (Initially hidden) -->
+  <div id="gesture-virtual-cursor" style="display: none; position: fixed; pointer-events: none; z-index: 100000; transform: translate(-50%, -50%); transition: left 0.07s ease-out, top 0.07s ease-out;">
+    <!-- Core target dot -->
+    <div style="width: 12px; height: 12px; border-radius: 50%; background: #a855f7; border: 1.5px solid #ffffff; box-shadow: 0 0 10px 2px rgba(168, 85, 247, 0.8);"></div>
+    <!-- Outer rotating dashed ring -->
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 32px; height: 32px; border-radius: 50%; border: 1px dashed rgba(168, 85, 247, 0.4); animation: rotate-dashed 10s linear infinite;"></div>
+    <!-- Dwell loading radial ring -->
+    <svg style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-90deg); width: 48px; height: 48px; overflow: visible;">
+      <circle cx="24" cy="24" r="18" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1.5" fill="none" />
+      <circle id="gesture-dwell-progress" cx="24" cy="24" r="18" stroke="#c084fc" stroke-width="2" fill="none" stroke-dasharray="113.1" stroke-dashoffset="113.1" style="transition: stroke-dashoffset 0.1s linear;" />
+    </svg>
+    <!-- Countdown text bubble -->
+    <span id="gesture-dwell-text" style="display: none; position: absolute; left: 28px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.8); border: 1px solid rgba(168,85,247,0.3); padding: 2px 6px; border-radius: 4px; font-size: 8px; font-family: monospace; color: #c084fc; white-space: nowrap; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">DWELL: 5s</span>
+  </div>
+
+  <style>
+    @keyframes rotate-dashed {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+  </style>
+
+  <script src="model-tester.js"></script>
+</body>
+</html>
